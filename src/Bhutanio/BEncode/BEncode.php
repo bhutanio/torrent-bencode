@@ -29,7 +29,7 @@ class BEncode {
 	 * @param array $data [array of public variables]
 	 * eg:
 	 * 
-	 * 	BENCODE::set([
+	 * 	$this->set([
 	 *		'announce'=>'http://www.torrentsite.com',
 	 *		'comment'=>'Downloaded from torrentsite.com',
 	 *		'created_by'=>'TorrentSite v1.0'
@@ -50,7 +50,7 @@ class BEncode {
 	 * @param  integer $pos [file position pointer]
 	 * @return array/null 	[Array of Bencoded data]
 	 * eg:
-	 * 		$torrent = BENCODE::bdecode( File::get('MyMovieTorrent.torrent'));
+	 * 		$torrent = $this->bdecode( File::get('MyMovieTorrent.torrent'));
 	 *  	var_dump($torrent);
 	 */
 	public function bdecode($s, &$pos=0)
@@ -63,8 +63,8 @@ class BEncode {
 			$pos++;
 			$retval=array();
 			while ($s[$pos]!='e'){
-				$key=BENCODE::bdecode($s, $pos);
-				$val=BENCODE::bdecode($s, $pos);
+				$key=$this->bdecode($s, $pos);
+				$val=$this->bdecode($s, $pos);
 				if ($key===null || $val===null)
 					break;
 				$retval[$key]=$val;
@@ -77,7 +77,7 @@ class BEncode {
 			$pos++;
 			$retval=array();
 			while ($s[$pos]!='e'){
-				$val=BENCODE::bdecode($s, $pos);
+				$val=$this->bdecode($s, $pos);
 				if ($val===null)
 					break;
 				$retval[]=$val;
@@ -135,7 +135,7 @@ class BEncode {
 				}else if (is_string($value)) {
 					$ret.=strlen($value).":".$value;
 				} else {
-					$ret.=BENCODE::bencode ($value);
+					$ret.=$this->bencode ($value);
 				}
 			}
 			return $ret."e";
@@ -156,7 +156,7 @@ class BEncode {
 	{
 		if ( is_file($filename) ) {
 			$f=file_get_contents($filename, FILE_BINARY);
-			return BENCODE::bdecode($f);
+			return $this->bdecode($f);
 		}
 		return null;
 	}
@@ -196,7 +196,7 @@ class BEncode {
 
 	/**
 	 * Replace array data on Decoded torrent data so that it can be bencoded into a private torrent file.
-	 * Provide the custom data using BENCODE::set();
+	 * Provide the custom data using $this->set();
 	 * @param  array $data 	[array data of a decoded torrent file]
 	 * @return array 		[array data for torrent file]
 	 */
