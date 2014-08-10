@@ -1,5 +1,5 @@
 <?php
-namespace Bhutanio\BEncode;
+namespace Bhutanio;
 
 /**
  * A BEncode Wrapper
