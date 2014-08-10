@@ -1,8 +1,9 @@
 <?php
+
 namespace Bhutanio;
 
 /**
- * A BEncode Wrapper
+ * PHP Library for decoding and encoding BitTorrent BEncoded data
  * Original src - https://wiki.theory.org/Decoding_encoding_bencoded_data_with_PHP
  * 
  * GIT :: https://github.com/bhutanio/torrent-bencode
@@ -10,9 +11,10 @@ namespace Bhutanio;
  * @package torrent-bencode
  * @author abixalmon
  */
+
 class BEncode {
 	
-	//public $announce = 'http://abi.io/announce';
+	//public $announce = 'http://example.com/announce';
 	public $announce = null;
 	// Torrent Comment
 	public $comment = null;
@@ -28,10 +30,10 @@ class BEncode {
 	 * Data Setter
 	 * @param array $data [array of public variables]
 	 * eg:
-	 * 
-	 * 	$this->set([
-	 *		'announce'=>'http://www.torrentsite.com',
-	 *		'comment'=>'Downloaded from torrentsite.com',
+	 *  $bcoder = new \Bhutanio\BEncode;
+	 * 	$bcoder->set([
+	 *		'announce'=>'http://www.example.com',
+	 *		'comment'=>'Downloaded from example.com',
 	 *		'created_by'=>'TorrentSite v1.0'
 	 *	]);
 	 */
@@ -39,7 +41,9 @@ class BEncode {
 	{
 		if ( is_array($data) ) {
 			foreach ($data as $key => $value) {
-				$this->$key = $value;
+				if ( isset($this->$key) ) {
+					$this->$key = $value;
+				}
 			}
 		}
 	}
@@ -50,7 +54,8 @@ class BEncode {
 	 * @param  integer $pos [file position pointer]
 	 * @return array/null 	[Array of Bencoded data]
 	 * eg:
-	 * 		$torrent = $this->bdecode( File::get('MyMovieTorrent.torrent'));
+	 * 		$bcoder = new \Bhutanio\BEncode;
+	 * 		$torrent = $bcoder->bdecode( File::get('MyAwesomeTorrent.torrent'));
 	 *  	var_dump($torrent);
 	 */
 	public function bdecode($s, &$pos=0)
@@ -92,8 +97,8 @@ class BEncode {
 			$pos+=$digits+1;
 			return $val;
 
-	//	case "0": case "1": case "2": case "3": case "4":
-	//	case "5": case "6": case "7": case "8": case "9":
+		// case "0": case "1": case "2": case "3": case "4":
+		// case "5": case "6": case "7": case "8": case "9":
 		default:
 			$digits=strpos($s, ':', $pos)-$pos;
 			if ($digits<0 || $digits >20)
