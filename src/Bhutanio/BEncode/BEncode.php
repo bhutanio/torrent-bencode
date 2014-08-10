@@ -25,7 +25,6 @@ class BEncode {
 		// Here you can load default announce URL, comment and created_by from your configuration file.
 	}
 
-	// Set torrent data
 	/**
 	 * Data Setter
 	 * @param array $data [array of public variables]
