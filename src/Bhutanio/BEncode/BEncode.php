@@ -39,10 +39,14 @@ class BEncode {
 	public function set($data=array())
 	{
 		if ( is_array($data) ) {
-			foreach ($data as $key => $value) {
-				if ( isset($this->$key) ) {
-					$this->$key = $value;
-				}
+			if ( isset($data['announce']) ) {
+				$this->announce = $data['announce'];
+			}
+			if ( isset($data['comment']) ) {
+				$this->comment = $data['comment'];
+			}
+			if ( isset($data['created_by']) ) {
+				$this->created_by = $data['created_by'];
 			}
 		}
 	}
