@@ -1,6 +1,6 @@
 <?php
 
-namespace Bhutanio;
+namespace Bhutanio\BEncode;
 
 /**
  * PHP Library for decoding and encoding BitTorrent BEncoded data
