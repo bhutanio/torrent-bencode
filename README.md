@@ -16,12 +16,12 @@ Bencoding is most commonly used in torrent files. These metadata files are simpl
 
 While less efficient than a pure binary encoding, bencoding is simple and (because numbers are encoded as text in decimal notation) is unaffected by endianness, which is important for a cross-platform application like BitTorrent. It is also fairly flexible, as long as applications ignore unexpected dictionary keys, so that new ones can be added without creating incompatibilities.
 
-##Requirements
+## Requirements
 
 	Apache or Nginx = Latest production version
 	PHP >= 5.3.0
 
-##Installation
+## Installation
 
 Add this package in your composer.json and update composer.
 ```
@@ -35,9 +35,9 @@ __Update Composer__
 
 ```composer update``` or ```php composer.phar update```
 
-##Usage
+## Usage
 
-###With Composer
+### With Composer
 
 ```php
 	
@@ -67,7 +67,7 @@ __Update Composer__
 
 ```
 
-###Without Composer
+### Without Composer
 ```php
 
 	require 'path/to/BEncode.php';
@@ -76,7 +76,7 @@ __Update Composer__
 
 ```
 
-##Functions
+## Functions
 
 ```php
 /**
