@@ -182,7 +182,7 @@ class BEncode {
 		{
 			$FileCount = 1;
 			$TotalSize = $data['info']['length'];
-			$FileList[]= array($data['info']['length'], $data['info']['name']);
+			$FileList[]= array('size'=>$data['info']['length'], 'name'=>$data['info']['name']);
 		} else { // Multiple file mode
 			$FileNames = array();
 			$TotalSize = 0;
